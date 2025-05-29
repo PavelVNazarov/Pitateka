@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ texts.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center; /* Центрируем текст и изображения */
+        }
+        header img {
+            display: block; /* Делаем изображение блочным элементом */
+            margin: 0 auto; /* Автоматические отступы слева и справа */
+            max-width: 100%; /* Ограничиваем ширину изображения */
+            height: auto; /* Сохраняем пропорции изображения */
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ texts.title }}</h1>
+    <h1>{{ texts.location }}</h1>
+    <header>
+        <img src="static/images/Pitateka_logo.png" alt="Pitateka_logo">
+        <img src="static/images/image0.png" alt="image0">
+    </header>
+    <main>
+        <section>
+            <h2>{{ texts.description }}</h2>
+        </section>
+        {% extends "base.html" %}
+    </main>
+</body>
+</html>

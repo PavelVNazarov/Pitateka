@@ -1,0 +1,246 @@
+<!-- services.html -->
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Триада-Х"</title>
+    <style>
+        /* Стили для меню */
+        nav {
+            background-color: #4CAF50; /* Зеленый фон */
+            padding: 15px;
+            text-align: center;
+            position: fixed; /* Фиксированное положение */
+            bottom: 0; /* Прикрепить к нижней части страницы */
+            width: 100%; /* Ширина на всю страницу */
+        }
+        nav a {
+            color: white;
+            margin: 0 15px; /* Уменьшил отступы по бокам */
+            text-decoration: none;
+            font-size: 18px; /* Уменьшил размер шрифта */
+            font-weight: bold;
+            padding: 8px 12px; /* Добавил отступы внутри кнопки для лучшего клика */
+            border-radius: 5px; /* Скругление углов кнопок */
+            transition: background-color 0.3s; /* Плавный переход для фона при наведении */
+        }
+        nav a:hover {
+            color: #333; /* Темный цвет при наведении */
+            background-color: rgba(255, 255, 255, 0.2); /* Легкий фон при наведении */
+        }
+        /* Основной контент */
+        .content {
+            padding-bottom: 60px; /* Отступ снизу, чтобы контент не перекрывался меню */
+        }
+    </style>
+</head>
+<body>
+    <!-- Основной контент страницы -->
+    <div class="content">
+        
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продукция компании &#34;Триада-Х&#34;</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #4CAF50; /* Зеленый фон */
+            padding-top: 60px; /* Отступ для фиксированного header */
+        }
+        h1 {
+            text-align: center;
+            color: #fff; /* Белый цвет текста для контраста */
+        }
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .product img {
+            max-width: 100px; /* Размер миниатюры */
+            margin-right: 15px;
+            cursor: pointer; /* Указатель при наведении */
+        }
+        .large-image {
+            display: none; /* Скрыть по умолчанию */
+            position: fixed; /* Фиксированное позиционирование */
+            max-width: 500px; /* Максимальная ширина большого изображения */
+            z-index: 1000; /* Чтобы изображение было выше других элементов */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+    <script>
+        function showLargeImage(thumbnail, imageUrl, largeImageId) {
+            const largeImage = document.getElementById(largeImageId);
+            if (!largeImage) return;
+
+            // Загружаем изображение
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                largeImage.src = imageUrl;
+                largeImage.style.display = 'block';
+
+                // Позиционирование большого изображения
+                const rect = thumbnail.getBoundingClientRect();
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                let left = rect.right + 10; // Позиция справа от миниатюры
+                let top = rect.top;
+
+                // Проверка, чтобы изображение не выходило за пределы окна
+                if (left + img.width > windowWidth) {
+                    left = rect.left - img.width - 10; // Позиция слева от миниатюры
+                }
+                if (top + img.height > windowHeight) {
+                    top = windowHeight - img.height - 10; /* Поднять изображение */
+                }
+
+                largeImage.style.left = `${left}px`;
+                largeImage.style.top = `${top}px`;
+            };
+        }
+
+        function hideLargeImage(largeImageId) {
+            const largeImage = document.getElementById(largeImageId);
+            if (largeImage) {
+                largeImage.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>Продукция компании &#34;Триада-Х&#34;</h1>
+
+<!-- Блоки продуктов -->
+
+<div class="product">
+    <img src="static/images/image1_s.jpg" alt="Пита средиземноморская (круглая) 13-14 см"
+         onmouseover="showLargeImage(this, 'static/images/image1.jpg', 'large-image-1')"
+         onmouseout="hideLargeImage('large-image-1')">
+    <div>
+        <h2>Пита средиземноморская (круглая) 13-14 см</h2>
+        <p>Вес: 70 гр</p>
+        <p>Срок годности: 6 месяцев при -18°C</p>
+        <p>Размораживается за 15 минут при комнатной температуре.</p>
+    </div>
+</div>
+<img id="large-image-1" class="large-image" alt="Большое изображение">
+
+
+<div class="product">
+    <img src="static/images/image2_s.jpg" alt="Пита средиземноморская (круглая) 15-16 см"
+         onmouseover="showLargeImage(this, 'static/images/image2.jpg', 'large-image-2')"
+         onmouseout="hideLargeImage('large-image-2')">
+    <div>
+        <h2>Пита средиземноморская (круглая) 15-16 см</h2>
+        <p>Вес: 90 гр</p>
+        <p>Срок годности: 6 месяцев при -18°C</p>
+        <p>Размораживается за 15 минут при комнатной температуре.</p>
+    </div>
+</div>
+<img id="large-image-2" class="large-image" alt="Большое изображение">
+
+
+<div class="product">
+    <img src="static/images/image3_s.jpg" alt="Пита кипрская (овальная) 15 см х 10 см"
+         onmouseover="showLargeImage(this, 'static/images/image3.jpg', 'large-image-3')"
+         onmouseout="hideLargeImage('large-image-3')">
+    <div>
+        <h2>Пита кипрская (овальная) 15 см х 10 см</h2>
+        <p>Вес: 70 гр</p>
+        <p>Срок годности: 6 месяцев при -18°C</p>
+        <p>Размораживается за 15 минут при комнатной температуре.</p>
+    </div>
+</div>
+<img id="large-image-3" class="large-image" alt="Большое изображение">
+
+
+<div class="product">
+    <img src="static/images/image4_s.jpg" alt="Пита кипрская (овальная) 20 см х 12 см"
+         onmouseover="showLargeImage(this, 'static/images/image4.jpg', 'large-image-4')"
+         onmouseout="hideLargeImage('large-image-4')">
+    <div>
+        <h2>Пита кипрская (овальная) 20 см х 12 см</h2>
+        <p>Вес: 90 гр</p>
+        <p>Срок годности: 6 месяцев при -18°C</p>
+        <p>Размораживается за 15 минут при комнатной температуре.</p>
+    </div>
+</div>
+<img id="large-image-4" class="large-image" alt="Большое изображение">
+
+
+<div class="product">
+    <img src="static/images/image5_s.jpg" alt="Тортилья пшеничная 16 см"
+         onmouseover="showLargeImage(this, 'static/images/image5.jpg', 'large-image-5')"
+         onmouseout="hideLargeImage('large-image-5')">
+    <div>
+        <h2>Тортилья пшеничная 16 см</h2>
+        <p>Вес: 30 гр</p>
+        <p>Срок годности: 6 месяцев при -18°C</p>
+        <p>Размораживается за 10 минут при комнатной температуре.</p>
+    </div>
+</div>
+<img id="large-image-5" class="large-image" alt="Большое изображение">
+
+
+<div class="product">
+    <img src="static/images/image6_s.jpg" alt="Замороженная пита"
+         onmouseover="showLargeImage(this, 'static/images/image6.jpg', 'large-image-6')"
+         onmouseout="hideLargeImage('large-image-6')">
+    <div>
+        <h2>Замороженная пита</h2>
+        <p>Вес: </p>
+        <p>Срок годности: 6 месяцев при -18°C</p>
+        <p>Размораживается за 10 минут при комнатной температуре.</p>
+    </div>
+</div>
+<img id="large-image-6" class="large-image" alt="Большое изображение">
+
+
+
+<div>
+    <h2>О пите</h2>
+    <p>Пита – один из старейших видов хлеба, приготовленных человеком. Она распространена в кухнях многих стран Восточного Средиземноморья: в Израиле, Греции, на Кипре, в Турции, Египте и ряде стран Северной Африки.</p>
+    <p>Пита – круглый хлеб с кармашком, напоминающим лепешку. Это – отличная еда и одновременно превосходная упаковка для фалафеля и хумуса, мяса, рыбы, различных салатов, приправ, паштетов, фаршей, грибов и даже шоколадной пасты. Также питу можно использовать в качестве основы для приготовления мини-пиццы или закрытой пиццы канцоне. Немного фантазии и закуска готова!</p>
+    <p>Наша пита изготавливается по традиционному и оригинальному рецепту из пшеничной хлебопекарной муки высшего сорта и выпекается в газовой печи на открытом огне. В процессе выпекания под воздействием высоких температур внутри лепешки образуется водяной пар, который отделяет верхний слой лепешки от нижнего. Так в пите образуется ее кармашек для начинки. Это натуральный продукт безупречно высокого качества, который не содержит консервантов и всевозможных разрыхлителей и улучшителей вкуса. Это – готовый к употреблению продукт, который не требует допекания.</p>
+    <p>Чтобы пита не подсыхала, держите ее в морозильной камере. При минусовой температуре пита может храниться на протяжении нескольких месяцев, а после размораживания и разогрева она станет на удивление такой же свежей и мягкой, словно ее только что испекли.</p>
+    <p>А подсохшую питу можно использовать в качестве хлебцев, нарезав ее маленькими треугольниками, которыми можно черпать соусы и дипы, например, хумус (дип из чечевицы) или тхину (паста из молотых кунжутных семечек), а также тарамосалата (греческая паста с икрой).</p>
+</div>
+
+<img class="large-image" id="large-image-1" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-2" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-3" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-4" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-5" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-6" src="" alt="Большое изображение">
+</body>
+</html>
+
+    </div>
+
+    <!-- Навигационное меню -->
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="services.html">Услуги</a>
+        <a href="contacts.html">Контакты</a>
+    </nav>
+</body>
+</html>

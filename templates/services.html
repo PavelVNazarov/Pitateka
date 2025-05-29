@@ -1,0 +1,128 @@
+<!-- services.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ texts.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #4CAF50; /* Зеленый фон */
+            padding-top: 60px; /* Отступ для фиксированного header */
+        }
+        h1 {
+            text-align: center;
+            color: #fff; /* Белый цвет текста для контраста */
+        }
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .product img {
+            max-width: 100px; /* Размер миниатюры */
+            margin-right: 15px;
+            cursor: pointer; /* Указатель при наведении */
+        }
+        .large-image {
+            display: none; /* Скрыть по умолчанию */
+            position: fixed; /* Фиксированное позиционирование */
+            max-width: 500px; /* Максимальная ширина большого изображения */
+            z-index: 1000; /* Чтобы изображение было выше других элементов */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+    <script>
+        function showLargeImage(thumbnail, imageUrl, largeImageId) {
+            const largeImage = document.getElementById(largeImageId);
+            if (!largeImage) return;
+
+            // Загружаем изображение
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                largeImage.src = imageUrl;
+                largeImage.style.display = 'block';
+
+                // Позиционирование большого изображения
+                const rect = thumbnail.getBoundingClientRect();
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                let left = rect.right + 10; // Позиция справа от миниатюры
+                let top = rect.top;
+
+                // Проверка, чтобы изображение не выходило за пределы окна
+                if (left + img.width > windowWidth) {
+                    left = rect.left - img.width - 10; // Позиция слева от миниатюры
+                }
+                if (top + img.height > windowHeight) {
+                    top = windowHeight - img.height - 10; /* Поднять изображение */
+                }
+
+                largeImage.style.left = `${left}px`;
+                largeImage.style.top = `${top}px`;
+            };
+        }
+
+        function hideLargeImage(largeImageId) {
+            const largeImage = document.getElementById(largeImageId);
+            if (largeImage) {
+                largeImage.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>{{ texts.title }}</h1>
+
+<!-- Блоки продуктов -->
+{% for product in texts.products %}
+<div class="product">
+    <img src="static/images/image{{ product.number }}_s.jpg" alt="{{ product.name }}"
+         onmouseover="showLargeImage(this, 'static/images/image{{ product.number }}.jpg', 'large-image-{{ loop.index }}')"
+         onmouseout="hideLargeImage('large-image-{{ loop.index }}')">
+    <div>
+        <h2>{{ product.name }}</h2>
+        <p>Вес: {{ product.weight }}</p>
+        <p>Срок годности: {{ product.shelf_life }}</p>
+        <p>Размораживается за {{ product.thawing_time }}.</p>
+    </div>
+</div>
+<img id="large-image-{{ loop.index }}" class="large-image" alt="Большое изображение">
+
+{% endfor %}
+
+<div>
+    <h2>{{ texts.about.title }}</h2>
+    <p>{{ texts.about.description }}</p>
+    <p>{{ texts.about.usage }}</p>
+    <p>{{ texts.about.production }}</p>
+    <p>{{ texts.about.storage }}</p>
+    <p>{{ texts.about.dried_usage }}</p>
+</div>
+
+<img class="large-image" id="large-image-1" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-2" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-3" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-4" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-5" src="" alt="Большое изображение">
+<img class="large-image" id="large-image-6" src="" alt="Большое изображение">
+</body>
+</html>
+{% endblock %}
+
